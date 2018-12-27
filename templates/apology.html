@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+
+{% block main %}
+
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('index')}}">Back to Homepage</a>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('register')}}">Back to Register</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="{{ url_for('login')}}">Login</a>
+  </li>
+
+<h1>  SORRY </h1>
+
+<p>
+  {{ message }}
+</p>
+
+<style>
+  body {
+    background-image:url({{ url_for('static', filename='images/b.jpg') }});
+
+  }
+  h1,p{
+    color:white;
+    font-size:50px;
+    margin:50px;
+    align="center";
+  }
+</style>
+
+{% endblock %}

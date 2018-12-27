@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block title %}
+     :BOOKS
+{% endblock %}
+
+{% block main %}
+<div class="navigation">
+  <ul class="nav justify-content-end">
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('index')}}">Home</a>
+    </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="{{ url_for('login')}}">Login</a>
+  </li>
+</ul>
+</div>
+
+<div style="margin-top: 200px" align="center">
+  <h1>Search Results</h1>
+
+  <ul >
+    {% if results == [] %}
+    <h5 id="outcomes"> SORRY! There is no result for your search, Please try again.</h5>
+    {% endif %}
+
+    {% for result in results %}
+
+    <div class="results">
+      <a href="{{url_for('outcome',title=result.title)}}">
+        <p>{{ result.title }}
+        {{ result.author }}
+        {{ result.year }}
+        {{ result.isbn }}</p>
+      </a>
+
+    {% endfor %}
+    </div>
+  </ul>
+</div>
+
+<style media="screen">
+  h1 {
+    color: #474747;
+    font-size:50px;
+    margin-botton:100px;
+    padding:20px;
+  }
+
+  #outcomes {
+    margin-top:50px;
+    color:#271f2d;
+  }
+    body {
+      background-image:url({{ url_for('static', filename='images/mou.jpg') }});
+      background-attachment: fixed;
+    }
+
+  p {
+    color: #2e2f33;
+    font-size:20px;
+  }
+
+  p:hover{
+    color: #d1b30c;
+  }
+
+
+
+</style>
+
+
+{% endblock %}

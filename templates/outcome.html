@@ -1,0 +1,119 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="navigation">
+  <ul class="nav justify-content-end">
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('index')}}">Home</a>
+    </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="{{ url_for('login')}}">Login</a>
+  </li>
+</ul>
+</div>
+
+<div class="1">
+  <div class="title">
+    Book Information
+  </div>
+
+  <div class="book-info">
+     <p><b>Book Title: </b>{{ result.title }}</p>
+      <p><b>Author: </b>{{ result.author }}</p>
+      <p><b>Year: </b>{{ result.year }}</p>
+      <p><b>Isbn: </b>{{ result.isbn }}</p>
+
+      <p class="card-text"><b>Average Rate: </b>{{ average_score }}</p>
+  </div>
+</div>
+
+<form method="post" action="{{url_for('outcome',title=result.title)}}">
+
+  <div class="rate" name="rate">
+    <div class="my-idea">My Idea about this book:</div>
+    <p class="note"> Notice: You can only review the same book once</p>
+     <input type="radio" id="star5" name="rate" value="5" />
+     <label for="star5" title="text">5 stars</label>
+     <input type="radio" id="star4" name="rate" value="4" />
+     <label for="star4" title="text">4 stars</label>
+     <input type="radio" id="star3" name="rate" value="3" />
+     <label for="star3" title="text">3 stars</label>
+     <input type="radio" id="star2" name="rate" value="2" />
+     <label for="star2" title="text">2 stars</label>
+     <input type="radio" id="star1" name="rate" value="1" />
+     <label for="star1" title="text">1 star</label>
+   </div>
+   <div class="type">
+       <textarea type="text" name="myreview" placeholder="Type review here" rows="5"></textarea>
+     </div>
+<button type="submit">Post</button>
+</form>
+
+
+<div class="reviews">
+<p>Reviews</p>
+{% for review in reviews: %}
+
+  <li>{{rate}} {{ review.reviews }}
+<p></p>
+      {{ review.time }}
+  </li>
+</div>
+{% endfor %}
+
+<style media="screen">
+  body {
+    background-image:url({{ url_for('static', filename='images/regi.jpg') }});
+    background-attachment: fixed;
+  }
+
+  .title {
+    text-align: center;
+    color: #3d3d3d;
+    margin-top:80px;
+    margin-botton:25px;
+    font-size:48px;
+  }
+
+  .book-info {
+    text-align: center;
+    margin:30px;
+    margin-top:20px;
+    font-size:20px;
+    color: #3d3d3d;
+  }
+
+  textarea {
+    width: 70%;
+    background: rgba(0, 0, 0, 0);
+    color:#3d3d3d;
+    font-size:18px;
+    font-color:white;
+    margin-left:10px;
+    margin-top:45px;
+    border:5px solid #ccc;
+  }
+
+  .my-idea, .reviews{
+    text-align: left;
+    margin-top:45px;
+    margin-left:20px;
+    font-size:20px;
+    color: #3d3d3d;
+  }
+
+  button {
+    background: rgba(0, 0, 0, 30%);
+    color:white;
+    weight:100%;
+    width:70%;
+    margin-left:265px;
+    border: none;
+    outline: none;
+    font-size:20px;
+    margin-top:20px;
+    border-radius: 14px;
+}
+</style>
+
+{% endblock %}

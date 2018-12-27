@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="navigation">
+  <ul class="nav justify-content-end">
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('index')}}"><b>Home</b></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="{{ url_for('login')}}">Already have id? <b>Login</b></a>
+  </li>
+</ul>
+</div>
+
+  <p></p>
+
+  <form action="/register" id="registration" method="post">
+  <div class="form-group">
+    <input class="form-control col-3" autocomplete="off" autofocus name="username" placeholder="username" type="text"/>
+  </div>
+
+  <div class="form-group">
+    <input class="form-control col-3" name="password" placeholder="Password" type="password"/>
+  </div>
+
+  <div class="form-group">
+    <input class="form-control col-3" name="confirmation" placeholder="Password(again)" type="password"/>
+  </div>
+
+    <button class="btn btn-outline-primary" type="submit">Register</button>
+  </form>
+
+  <script>
+    let form = document.getElementById("registration");
+    form.onsubmit = function(){
+      if (!form.username.value)
+      {
+        alert("missing username");
+        return false;
+      }
+      else if (!form.password.value)
+      {
+        alert("missing password");
+        return false;
+      }
+      else if (form.password.value != form.confirmation.value)
+      {
+        alert("passwords don't match");
+        return false;
+      }
+    };
+  </script>
+{% endblock %}
+
+<style>
+  body {
+    background-image:url({{ url_for('static', filename='images/regi.jpg') }});
+    background-attachment: fixed;
+  }
+
+  .form-group {
+    text-align: center;
+    margin:30px;
+    margin-top:20px;
+    font-size:20px;
+  }
+</style>
